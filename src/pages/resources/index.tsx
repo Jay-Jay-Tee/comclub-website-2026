@@ -17,7 +17,7 @@ function Resources() {
 
           <br/>
 
-        <ResourceLink
+          <ResourceLink
             label='t.me/nuscomputingclub'
             link='https://t.me/nuscomputingclub'
             icon={FaTelegramPlane}
