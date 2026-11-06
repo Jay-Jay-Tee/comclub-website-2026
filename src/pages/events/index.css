@@ -24,6 +24,7 @@
 
 .events>section {
   @apply
+    w-full
     h-fit
   ;
 }
