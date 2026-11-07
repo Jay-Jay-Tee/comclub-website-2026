@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# vite leaves these behind if it crashes while loading the config
+vite.config.*.timestamp-*
