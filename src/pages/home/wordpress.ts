@@ -3,7 +3,7 @@
 // parser covers them all. The API sends CORS headers, so a plain fetch() works (no JSONP like Flickr needs).
 export const SITE = 'https://www.comp.nus.edu.sg/';
 
-export type PostType = 'news';
+export type PostType = 'news' | 'features';
 
 export interface Post {
   id: number;

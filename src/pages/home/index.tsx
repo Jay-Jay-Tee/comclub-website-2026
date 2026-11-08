@@ -56,6 +56,7 @@ function Home() {
         description='News and research stories from around the School of Computing.'
         tabs={[
           { type: 'news', label: 'News' },
+          { type: 'features', label: 'Features' },
         ]}
       />
 
