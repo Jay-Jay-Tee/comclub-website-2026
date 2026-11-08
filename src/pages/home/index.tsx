@@ -7,7 +7,7 @@ import NusPosts from './NusPosts';
 
 function Home() {
   return (
-    <div>
+    <div className='home'>
       {/* hero section */}
       <section>
         <div className='section-description'>
@@ -23,7 +23,7 @@ function Home() {
       </section>
 
       {/* latest announcements */}
-      <div className='latest-announcements bg-slate-100'>
+      <div className='latest-announcements'>
         <div className='section-header bg-primary'>
           <h1>Latest Announcements</h1>
         </div>
@@ -31,6 +31,7 @@ function Home() {
           <Carousel></Carousel>
         </div>
       </div>
+
 
       {/* events */}
       <section>
@@ -58,7 +59,7 @@ function Home() {
 
       {/* study planner */}
       {/* flex-col-reverse is used to render the graphic on top */}
-      <section className='flex-col-reverse md:flex-row  bg-slate-100'>
+      <section className='flex-col-reverse md:flex-row'>
         <div className='section-description'>
           <h2>Stressed about</h2>
           <h1>Study plans?</h1>

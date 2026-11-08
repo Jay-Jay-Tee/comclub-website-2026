@@ -1,5 +1,5 @@
 /* Undo the global `section` layout (flex, 80vh) from index.css, like .comclub-gallery does. */
-.nus-posts { display: block; height: auto; padding: 5rem 2rem; background: white; color: #365486; }
+.nus-posts { display: block; height: auto; padding: 5rem 2rem; color: #365486; }
 .posts-inner { max-width: 1200px; margin: auto; }
 .posts-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 2rem; }
 .posts-heading h2 { font-family: 'DM Sans', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.15; }
@@ -38,7 +38,7 @@
 }
 @keyframes posts-shimmer { to { background-position: -200% 0; } }
 
-.posts-message { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 3rem 1rem; text-align: center; background: #f1f5f9; border-radius: 8px; }
+.posts-message { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 3rem 1rem; text-align: center; background: var(--surface, #f1f5f9); border-radius: 8px; }
 .posts-message h4 { font-size: 1.3rem; }
 .posts-message button { background: #365486; color: white; padding: .6rem 1rem; border-radius: 6px; margin-right: 1rem; }
 
