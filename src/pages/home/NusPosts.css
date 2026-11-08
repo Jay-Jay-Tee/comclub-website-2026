@@ -8,7 +8,30 @@
 .posts-heading a:hover, .posts-message a:hover { text-decoration: underline; }
 .nus-posts :is(a, button):focus-visible { outline: 3px solid #365486; outline-offset: 4px; }
 
+/* Pills: one highlight sits behind the buttons and slides to the selected one (--pill-x / --pill-w are set
+   from NusPosts.tsx). The buttons only change text colour, so the motion all comes from the highlight. */
+.posts-pills {
+  position: relative; display: inline-flex; gap: .25rem; padding: .3rem; margin-bottom: 2rem;
+  border-radius: 999px; background: var(--surface, #f1f5f9); border: 1px solid #e2e8f0;
+}
+.posts-pills button {
+  position: relative; z-index: 1; padding: .55rem 1.25rem; border-radius: 999px; background: none;
+  color: #365486; font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: .9rem;
+  transition: color 250ms ease;
+}
+.posts-pills button[aria-pressed='true'] { color: white; }
+.posts-pills button:not([aria-pressed='true']):hover { color: #1e3a66; }
+.posts-pill-highlight {
+  position: absolute; top: .3rem; bottom: .3rem; left: 0; border-radius: 999px; background: #365486;
+  width: var(--pill-w, 0); transform: translateX(var(--pill-x, 0));
+  box-shadow: 0 4px 12px -4px rgba(54, 84, 134, .5);
+  transition: transform 350ms cubic-bezier(.2, .7, .2, 1), width 350ms cubic-bezier(.2, .7, .2, 1);
+}
+
 .posts-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+/* New cards (first load or a tab switch) fade up, staggered by the inline animation-delay. */
+.posts-grid > li:not(.post-skeleton) { animation: posts-enter 450ms cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes posts-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .post-card {
   display: flex; flex-direction: column; height: 100%; overflow: hidden; border-radius: 8px; background: white;
   border: 1px solid #e2e8f0; transition: transform 200ms ease, box-shadow 200ms ease;

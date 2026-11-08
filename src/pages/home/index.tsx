@@ -52,9 +52,11 @@ function Home() {
       <Gallery />
 
       <NusPosts
-        type='news'
-        title='NUS Computing News'
-        description='Fresh stories from around the School of Computing.'
+        title='From NUS Computing'
+        description='News and research stories from around the School of Computing.'
+        tabs={[
+          { type: 'news', label: 'News' },
+        ]}
       />
 
       {/* study planner */}
