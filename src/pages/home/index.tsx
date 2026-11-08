@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './index.css';
 import Carousel from './Carousel';
 import Gallery from './Gallery';
+import NusPosts from './NusPosts';
 
 function Home() {
   return (
@@ -49,9 +50,15 @@ function Home() {
 
       <Gallery />
 
+      <NusPosts
+        type='news'
+        title='NUS Computing News'
+        description='Fresh stories from around the School of Computing.'
+      />
+
       {/* study planner */}
       {/* flex-col-reverse is used to render the graphic on top */}
-      <section className='flex-col-reverse md:flex-row'>
+      <section className='flex-col-reverse md:flex-row  bg-slate-100'>
         <div className='section-description'>
           <h2>Stressed about</h2>
           <h1>Study plans?</h1>
