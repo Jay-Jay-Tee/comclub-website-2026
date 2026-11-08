@@ -29,12 +29,16 @@ function PostCard({ post }: { post: Post }) {
 
 export default function NusPosts(
   { type, title, description, noOfPosts = 6 }:
-    { type: PostType; title: string; description: string; noOfPosts: number }
+    { type: PostType; title: string; description: string; noOfPosts?: number },
 ) {
   const root = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const [posts, setPosts] = useState<Post[] | null>(null);
   const [error, setError] = useState(false);
+
+  // this is a counter designed to cause the loadPost function to try again
+  // when the try again button is calld. it deliverately is used to cause
+  // the use effect to rerender. Thats all.
   const [attempt, setAttempt] = useState(0);
 
   // Same as Gallery: only fetch once the section is about to scroll into view.
@@ -58,7 +62,7 @@ export default function NusPosts(
       .catch(() => { if (active) setError(true); });
 
     return () => { active = false; };
-  }, [type, visible, attempt]);
+  }, [type, noOfPosts, visible, attempt]);
 
   const allLink = `${SITE}${type}/`;
 
@@ -77,6 +81,9 @@ export default function NusPosts(
           <div className='posts-message'>
             <h4>{error ? 'Stories are taking a little longer.' : 'No stories yet.'}</h4>
             <div>
+              {/* we dont directly call loadPosts again so that the old fetching and active */}
+              {/* cleanly id discarded, the stale requests are removed and then only new one */}
+              {/* created saving space */}
               {error && <button onClick={() => setAttempt(attempt + 1)}>Try again</button>}
               <a href={allLink} target='_blank' rel='noopener noreferrer'>Read on NUS Computing</a>
             </div>
@@ -84,7 +91,8 @@ export default function NusPosts(
         ) : (
           <ul className='posts-grid' aria-busy={!posts}>
             {posts ? posts.map((post) => <PostCard key={post.id} post={post} />)
-              : Array.from({ length: noOfPosts }, (_, slot) => <li key={slot} className='post-skeleton' aria-hidden='true' />)}
+              : Array.from({ length: noOfPosts }, (_, slot) =>
+                <li key={slot} className='post-skeleton' aria-hidden='true' />)}
           </ul>
         )}
       </div>

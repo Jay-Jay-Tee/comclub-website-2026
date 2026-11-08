@@ -35,7 +35,8 @@ export const toText = (html: string) => html
 const onSite = (url: unknown): url is string => typeof url === 'string' && url.startsWith(SITE);
 
 // Use this as an example page to see the structure of the posts
-// https://www.comp.nus.edu.sg/wp-json/wp/v2/news?per_page=6&_embed=wp:featuredmedia&_fields=id,date,link,title,excerpt,_links,_embedded
+// https://www.comp.nus.edu.sg/wp-json/wp/v2/news?per_page=6&_embed=wp:featuredmedia
+//   &_fields=id,date,link,title,excerpt,_links,_embedded
 export function parsePosts(data: unknown): Post[] {
   if (!Array.isArray(data)) throw new Error('Invalid posts response');
 
@@ -59,30 +60,35 @@ export function parsePosts(data: unknown): Post[] {
   });
 }
 
-// One request per post type per page load. Stores the promise, so callers that ask at the same time share
-// a single request; a failed request is dropped so "Try again" fetches again.
-// ponytail: no expiry; the data only changes a few times a week and a reload refreshes it.
-const cache = new Map<PostType, Promise<Post[]>>();
+// One entry per post type: the promise plus how many posts it asked for. Storing the promise (not the result)
+// lets callers that ask at the same time share one request. A failed request is dropped so "Try again" refetches.
+// ponytail: lives until the page reloads (no expiry); the data only changes a few times a week.
+const cache = new Map<PostType, { count: number; request: Promise<Post[]> }>();
 
 export function loadPosts(type: PostType, noOfPosts: number = 6): Promise<Post[]> {
+  // Enough cached: hand back the first noOfPosts. Too few: fall through and fetch the bigger amount.
   const cached = cache.get(type);
-  if (cached) return cached;
+  if (cached && cached.count >= noOfPosts) return cached.request.then((posts) => posts.slice(0, noOfPosts));
 
   const params = new URLSearchParams({
     per_page: String(noOfPosts),
+    orderby: 'date',
+    order: 'desc',
     _embed: 'wp:featuredmedia', // include the featured image in the same response
     _fields: 'id,date,link,title,excerpt,_links,_embedded', // _embedded needs _links to be listed too
   });
 
-  const request = fetch(`${SITE}wp-json/wp/v2/${type}?${params}`, { signal: AbortSignal.timeout(12000) })
+  // this is a promise of a future response returned. The AbortSingal is for new browsers (older get no timeout)
+  const request = fetch(`${SITE}wp-json/wp/v2/${type}?${params}`, { signal: AbortSignal.timeout?.(12000) })
     .then((response) => {
       if (!response.ok) throw new Error(`NUS Computing returned ${response.status}`);
       return response.json();
     })
     .then(parsePosts);
 
-  request.catch(() => cache.delete(type));
-  cache.set(type, request);
+  // Only drop our own entry: a bigger request may have replaced it while this one was in flight.
+  request.catch(() => { if (cache.get(type)?.request === request) cache.delete(type); });
+  cache.set(type, { count: noOfPosts, request }); // we store that promise to be used upon later
 
   return request;
 }
