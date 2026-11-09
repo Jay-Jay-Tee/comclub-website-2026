@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import {
   FaTelegramPlane,
   FaCalendarAlt,
@@ -596,7 +596,7 @@ function Resources() {
               onClick={() => setSelectedMajor(key)}
               className={getPillClass(selectedMajor === key)}
             >
-              {key} â€” {PLANS[key].name}
+              {key} - {PLANS[key].name}
             </button>
           ))}
         </div>
@@ -633,14 +633,14 @@ function Resources() {
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div className='planner-sem-card'>
                   <h4 className='font-bold text-primary text-base'>
-                    Year 1 â€¢ Semester 1 Recommended
+                    Year 1 - Semester 1 Recommended
                   </h4>
                   {renderModList(activePlan.s1)}
                 </div>
 
                 <div className='planner-sem-card'>
                   <h4 className='font-bold text-primary text-base'>
-                    Year 1 â€¢ Semester 2 Recommended
+                    Year 1 - Semester 2 Recommended
                   </h4>
                   {renderModList(activePlan.s2)}
                 </div>
