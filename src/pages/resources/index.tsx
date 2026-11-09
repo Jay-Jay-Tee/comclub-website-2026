@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import {
   FaTelegramPlane,
   FaCalendarAlt,
@@ -18,6 +18,7 @@ type MajorKey = 'CS' | 'BAIS' | 'BZA' | 'CEG' | 'ISEC';
 interface ModItem {
   code: string;
   title: string;
+  units: string;
   su: boolean;
   note: string;
 }
@@ -92,29 +93,33 @@ const PLANS: Record<MajorKey, MajorPlan> = {
     name: 'Computer Science',
     summary:
       'Build strong programming, discrete math, and systems foundations in Year 1 to unlock focus areas in Year 2.',
-    url: 'https://www.comp.nus.edu.sg/programmes/ug/cs/curr/',
+    url: 'https://www.comp.nus.edu.sg/programmes/ug/cs/',
     s1: [
       {
         code: 'CS1101S',
         title: 'Programming Methodology',
+        units: '4 Units',
         su: true,
         note: 'Unlocks CS2030S & CS2040S',
       },
       {
         code: 'CS1231S',
         title: 'Discrete Structures',
+        units: '4 Units',
         su: true,
         note: 'Core proof & logic prerequisite',
       },
       {
         code: 'MA1521',
         title: 'Calculus for Computing',
+        units: '4 Units',
         su: true,
         note: 'Or MA2002 Calculus',
       },
       {
         code: 'IS1108',
         title: 'Digital Ethics and Data Privacy',
+        units: '4 Units',
         su: true,
         note: 'Computing common curriculum',
       },
@@ -123,24 +128,28 @@ const PLANS: Record<MajorKey, MajorPlan> = {
       {
         code: 'CS2030S',
         title: 'Programming Methodology II',
+        units: '4 Units',
         su: false,
         note: 'OOP & functional Java (No S/U)',
       },
       {
         code: 'CS2040S',
         title: 'Data Structures and Algorithms',
+        units: '4 Units',
         su: false,
         note: 'Core technical interview mod (No S/U)',
       },
       {
         code: 'MA1522',
         title: 'Linear Algebra for Computing',
+        units: '4 Units',
         su: true,
         note: 'Essential for AI/ML tracks',
       },
       {
         code: 'ES2660',
         title: 'Communicating in the Information Age',
+        units: '4 Units',
         su: true,
         note: 'Common curriculum communication',
       },
@@ -151,29 +160,33 @@ const PLANS: Record<MajorKey, MajorPlan> = {
     name: 'Business Artificial Intelligence Systems',
     summary:
       'Combines Python/Java software engineering with business analytics, AI governance, and enterprise AI systems.',
-    url: 'https://www.comp.nus.edu.sg/programmes/ug/is/curr/',
+    url: 'https://www.comp.nus.edu.sg/programmes/ug/is/',
     s1: [
       {
         code: 'CS1010A',
         title: 'Programming Methodology (Python)',
+        units: '4 Units',
         su: true,
         note: 'Unlocks CS2030 & CS2040',
       },
       {
         code: 'IS1108',
         title: 'Digital Ethics and Data Privacy',
+        units: '4 Units',
         su: true,
         note: 'AI ethics & governance foundation',
       },
       {
         code: 'MA1521',
         title: 'Calculus for Computing',
+        units: '4 Units',
         su: true,
         note: 'Math foundation for ML',
       },
       {
         code: 'CFG1002',
-        title: 'Career Catalyst (2 Units)',
+        title: 'Career Catalyst',
+        units: '2 Units',
         su: true,
         note: 'CS/CU; unlocks CFG2002 trips',
       },
@@ -182,24 +195,28 @@ const PLANS: Record<MajorKey, MajorPlan> = {
       {
         code: 'CS2030',
         title: 'Programming Methodology II (Java)',
+        units: '4 Units',
         su: false,
         note: 'Core OOP software design (No S/U)',
       },
       {
         code: 'BT1101',
         title: 'Introduction to Business Analytics',
+        units: '4 Units',
         su: true,
         note: 'Data modelling & statistics',
       },
       {
         code: 'IS2101',
         title: 'Business and Technical Communication',
+        units: '4 Units',
         su: true,
         note: 'IS/BAIS communication core',
       },
       {
         code: 'CS1231S',
         title: 'Discrete Structures',
+        units: '4 Units',
         su: true,
         note: 'Can be taken in Sem 1 or Sem 2',
       },
@@ -210,29 +227,33 @@ const PLANS: Record<MajorKey, MajorPlan> = {
     name: 'Business Analytics',
     summary:
       'Focuses on statistical modelling, machine learning, operations research, and data-driven decision making.',
-    url: 'https://www.comp.nus.edu.sg/programmes/ug/bza/curr/',
+    url: 'https://www.comp.nus.edu.sg/programmes/ug/ba/',
     s1: [
       {
         code: 'CS1010S',
         title: 'Programming Methodology (Python)',
+        units: '4 Units',
         su: true,
         note: 'Core Python foundation',
       },
       {
         code: 'BT1101',
         title: 'Introduction to Business Analytics',
+        units: '4 Units',
         su: true,
         note: 'R & analytics fundamentals',
       },
       {
         code: 'MA1521',
         title: 'Calculus for Computing',
+        units: '4 Units',
         su: true,
         note: 'Required for probability/ML',
       },
       {
         code: 'IS1108',
         title: 'Digital Ethics and Data Privacy',
+        units: '4 Units',
         su: true,
         note: 'Data governance core',
       },
@@ -241,24 +262,28 @@ const PLANS: Record<MajorKey, MajorPlan> = {
       {
         code: 'CS2030',
         title: 'Programming Methodology II',
+        units: '4 Units',
         su: false,
         note: 'Unlocks advanced engineering mods',
       },
       {
         code: 'CS2040',
         title: 'Data Structures and Algorithms',
+        units: '4 Units',
         su: false,
         note: 'Core algorithms (No S/U)',
       },
       {
         code: 'BT2102',
         title: 'Data Management and Visualisation',
+        units: '4 Units',
         su: false,
         note: 'SQL & data pipelines (No S/U)',
       },
       {
         code: 'MA1522',
         title: 'Linear Algebra for Computing',
+        units: '4 Units',
         su: true,
         note: 'Matrix math for ML',
       },
@@ -274,24 +299,28 @@ const PLANS: Record<MajorKey, MajorPlan> = {
       {
         code: 'CS1010',
         title: 'Programming Methodology (C)',
+        units: '4 Units',
         su: true,
         note: 'C programming & pointers',
       },
       {
         code: 'CG1111A',
         title: 'Engineering Principles and Practice I',
+        units: '4 Units',
         su: true,
         note: 'Hands-on hardware & robot lab',
       },
       {
         code: 'MA1511',
-        title: 'Engineering Calculus (2 Units)',
+        title: 'Engineering Calculus',
+        units: '2 Units',
         su: true,
         note: 'Paired with MA1512 (2 Units)',
       },
       {
         code: 'CS1231',
         title: 'Discrete Structures',
+        units: '4 Units',
         su: true,
         note: 'Logic & discrete math',
       },
@@ -300,24 +329,28 @@ const PLANS: Record<MajorKey, MajorPlan> = {
       {
         code: 'CG2111A',
         title: 'Engineering Principles and Practice II',
+        units: '4 Units',
         su: true,
         note: 'Bare-metal MCU & ROS project',
       },
       {
         code: 'CS2040C',
         title: 'Data Structures and Algorithms (C++)',
+        units: '4 Units',
         su: false,
         note: 'C++ algorithms (No S/U)',
       },
       {
         code: 'EE2026',
         title: 'Digital Design',
+        units: '4 Units',
         su: false,
         note: 'FPGA & Verilog project',
       },
       {
         code: 'MA1508E',
         title: 'Linear Algebra for Engineering',
+        units: '4 Units',
         su: true,
         note: 'Engineering linear algebra',
       },
@@ -328,29 +361,33 @@ const PLANS: Record<MajorKey, MajorPlan> = {
     name: 'Information Security',
     summary:
       'Covers systems security, cryptography, network defence, binary exploitation, and secure architecture.',
-    url: 'https://www.comp.nus.edu.sg/programmes/ug/isc/curr/',
+    url: 'https://www.comp.nus.edu.sg/programmes/ug/isc/',
     s1: [
       {
         code: 'CS1101S',
         title: 'Programming Methodology',
+        units: '4 Units',
         su: true,
         note: 'Or CS1010',
       },
       {
         code: 'CS1231S',
         title: 'Discrete Structures',
+        units: '4 Units',
         su: true,
         note: 'Crucial for cryptography',
       },
       {
         code: 'IS1108',
         title: 'Digital Ethics and Data Privacy',
+        units: '4 Units',
         su: true,
         note: 'Privacy & governance',
       },
       {
         code: 'MA1521',
         title: 'Calculus for Computing',
+        units: '4 Units',
         su: true,
         note: 'Math foundation',
       },
@@ -359,24 +396,28 @@ const PLANS: Record<MajorKey, MajorPlan> = {
       {
         code: 'CS2030S',
         title: 'Programming Methodology II',
+        units: '4 Units',
         su: false,
         note: 'Software construction (No S/U)',
       },
       {
         code: 'CS2040S',
         title: 'Data Structures and Algorithms',
+        units: '4 Units',
         su: false,
         note: 'Core algorithms (No S/U)',
       },
       {
         code: 'CS2100',
         title: 'Computer Organisation',
+        units: '4 Units',
         su: false,
         note: 'Assembly & memory layout (No S/U)',
       },
       {
         code: 'CS2107',
         title: 'Introduction to Information Security',
+        units: '4 Units',
         su: false,
         note: 'Unlocks all Level-3000 security mods',
       },
@@ -384,6 +425,14 @@ const PLANS: Record<MajorKey, MajorPlan> = {
     tip: 'Taking CS2100 & CS2107 early in Y1S2 / Y2S1 unlocks CS3235 (Computer Security) and CTF tracks.',
   },
 };
+
+function getPillClass(isActive: boolean) {
+  return isActive
+    ? 'px-3.5 py-1.5 rounded-full text-xs md:text-sm font-semibold border ' +
+      'transition-all bg-[#002855] text-white border-[#002855] shadow-sm'
+    : 'px-3.5 py-1.5 rounded-full text-xs md:text-sm font-semibold border ' +
+      'transition-all bg-white text-slate-700 border-slate-300 hover:bg-slate-100';
+}
 
 function Resources() {
   const [category, setCategory] = useState<Category>('ALL');
@@ -425,6 +474,7 @@ function Resources() {
         <div>
           <div className='flex items-center gap-2'>
             <span className='font-bold text-sm text-primary'>{mod.code}</span>
+            <span className='text-xs text-slate-500'>({mod.units})</span>
             <span
               className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
                 mod.su
@@ -478,11 +528,7 @@ function Resources() {
               type='button'
               aria-pressed={category === cat.value}
               onClick={() => setCategory(cat.value)}
-              className={`resources-pill ${
-                category === cat.value
-                  ? 'resources-pill-active'
-                  : 'resources-pill-inactive'
-              }`}
+              className={getPillClass(category === cat.value)}
             >
               {cat.label}
             </button>
@@ -491,7 +537,13 @@ function Resources() {
       </div>
 
       <div className='resources-content'>
-        <div className='resource-window-container'>
+        <div
+          className={
+            filteredFolders.length > 0
+              ? 'resource-window-container'
+              : 'flex flex-col gap-4 w-full max-w-2xl mx-auto'
+          }
+        >
           {filteredPortals.length > 0 ? (
             filteredPortals.map((portal) => (
               <ResourceLink
@@ -502,23 +554,25 @@ function Resources() {
               />
             ))
           ) : (
-            <p className='text-sm text-slate-500 py-4'>
+            <p className='text-sm text-slate-500 py-4 text-center'>
               No portal links match your current filter.
             </p>
           )}
         </div>
 
-        <div className='resource-link-container'>
-          <div className='flex flex-wrap justify-center gap-2'>
-            {filteredFolders.map((folder) => (
-              <FolderLink
-                key={folder.label}
-                label={folder.label}
-                link={folder.link}
-              />
-            ))}
+        {filteredFolders.length > 0 && (
+          <div className='resource-link-container'>
+            <div className='grid grid-cols-2 gap-4 place-items-center'>
+              {filteredFolders.map((folder) => (
+                <FolderLink
+                  key={folder.label}
+                  label={folder.label}
+                  link={folder.link}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className='planner-section'>
@@ -540,13 +594,9 @@ function Resources() {
               role='tab'
               aria-selected={selectedMajor === key}
               onClick={() => setSelectedMajor(key)}
-              className={`resources-pill ${
-                selectedMajor === key
-                  ? 'resources-pill-active'
-                  : 'resources-pill-inactive'
-              }`}
+              className={getPillClass(selectedMajor === key)}
             >
-              {key} — {PLANS[key].name}
+              {key} â€” {PLANS[key].name}
             </button>
           ))}
         </div>
@@ -572,7 +622,7 @@ function Resources() {
                   target='_blank'
                   rel='noopener noreferrer'
                   className='inline-flex items-center gap-2 px-4 py-2 rounded-xl
-                    bg-primary text-white text-xs md:text-sm font-semibold
+                    bg-[#002855] text-white text-xs md:text-sm font-semibold
                     hover:opacity-90 shrink-0'
                 >
                   <span>Official Curriculum</span>
@@ -583,14 +633,14 @@ function Resources() {
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div className='planner-sem-card'>
                   <h4 className='font-bold text-primary text-base'>
-                    Year 1 • Semester 1 Recommended
+                    Year 1 â€¢ Semester 1 Recommended
                   </h4>
                   {renderModList(activePlan.s1)}
                 </div>
 
                 <div className='planner-sem-card'>
                   <h4 className='font-bold text-primary text-base'>
-                    Year 1 • Semester 2 Recommended
+                    Year 1 â€¢ Semester 2 Recommended
                   </h4>
                   {renderModList(activePlan.s2)}
                 </div>
