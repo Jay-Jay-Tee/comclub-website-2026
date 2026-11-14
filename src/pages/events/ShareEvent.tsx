@@ -58,7 +58,9 @@ function ShareEvent({ title, pageUrl }: ShareEventProps) {
           Copy link
         </button>
       </div>
-      <p className='event-share-status' role='status' aria-live='polite' aria-atomic='true'>{message}</p>
+      <p className={copied ? 'sr-only' : 'event-share-status'} role='status' aria-live='polite' aria-atomic='true'>
+        {message}
+      </p>
       {showLink && (
         <div className='event-share-fallback'>
           <label htmlFor={linkId}>Event link</label>
