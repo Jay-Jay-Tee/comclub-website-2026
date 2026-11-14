@@ -56,7 +56,7 @@ function CalendarActions({ article, pageUrl }: CalendarActionsProps) {
   }
 
   return (
-    <Menu as='div' className='max-w-full px-4'>
+    <Menu as='div' className='max-w-full'>
       <MenuButton
         type='button'
         className='group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-white
