@@ -1,24 +1,21 @@
 /// <reference types="vite/client" />
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import articles from './articles.json';
 import WindowCard from '../../layout/WindowCard';
 import './Article.css';
-//zod.ts already has the Article type containing dates, title and event link so just import it from there
-import { parseArticles, type Article as EventArticle } from './zod';
+import { parseArticles } from './zod';
 import Linkify from '../../components/Linkify';
 import CalendarActions from './CalendarActions';
+import ShareEvent from './ShareEvent';
 
 const parsedArticles = Object.values(parseArticles(articles));
 
 function Article() {
   const { articleLink } = useParams();
-  const [content, setContent] = useState<EventArticle>();
-
-  useEffect(() => {
-    setContent(parsedArticles.find((article) => article.link === articleLink));
-  }, [articleLink]);
+  // Derive this during render so sharing never pairs the previous title with a new URL.
+  const content = parsedArticles.find((article) => article.link === articleLink);
   return (
     <div className='article'>
       <Link to='/events' className='article-back'>
@@ -28,7 +25,10 @@ function Article() {
       {
         content && <>
           <h1>{content.title}</h1>
-          <CalendarActions article={content} pageUrl={window.location.href} />
+          <div className='flex w-full flex-wrap items-start justify-center gap-3 px-4'>
+            <CalendarActions article={content} pageUrl={window.location.href} />
+            <ShareEvent key={articleLink} title={content.title} pageUrl={window.location.href} />
+          </div>
 
           {/* { render only if there's an image } */}
           {
